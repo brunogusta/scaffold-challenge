@@ -11,7 +11,7 @@
   <li>Laravel</li>
   <li>MySQL</li>
   <li>Mailtrap</li>
-
+  <li>Composer</li>
 </ul>
 
 ---
@@ -19,7 +19,16 @@
 <ul>
   <li>Start by cloning or downloading this repository.</li>
   <li>
-    In your folder, install the dependencies using your preferred package manager (npm, yarn).
+      Whith composer installed, in your cloned folder run the follow command to install laravel dependencies:
+
+      composer install
+
+  </li>
+  <li>
+    Afther this run next command to install front-end dependencies:
+
+    npm install or yarn
+
   </li>
   <li>
     In .env file make the following modifications:
@@ -44,15 +53,16 @@
    <li>
       Run the command to update configurations: 
       
+      php artisan key:generate
       php artisan config:cache
   </li>
   <li>
       Run the next commands to start the aplication:
 
-      npm run dev
-      php artisan serve
       php artisan migrate
       php artisan db:seed
+      php artisan serve
+      npm run dev
 
   </li>
    <li>
