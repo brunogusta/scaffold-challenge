@@ -3,35 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPasswordEmail;
 
-use app\User;
+use App\User;
 
 class ForgotPasswordController extends Controller
 {
-    public function forgot(Request $request) {
-        $email = $request->only('email');
+  public function forgot(Request $request) {
+    try {
 
-        $user = User::where('email', $email)->first();
+      $messages = [
+        'required' => 'The :attribute field is required.',
+        'exists' => 'The :attribute not exist.',
+      ];
 
-        if (!$user) {
-            return response.json(['error' => 'Email not found.'], 400);
-          }
+      $validator = Validator::make($request->all(), [
+        'email' => 'required|exists:users',
+      ], $messages);
 
-        if ($user->confirmed) {
-            return response.json(['error' => 'Email already confirmed.'], 400);
-          }
+      if ($validator->fails()) {
+        return response($validator->errors()->first(), 400);
+      }
 
-        $bytes = random_bytes(15);
+      $user = User::where('email', $request->email)->first();
 
-        $resetPasswordToken = bin2hex($bytes);
+      $hash = md5(uniqid(rand(), true));
 
-        User::where('email', $email)
-            ->update(['password_reset_token' => $resetPasswordToken]);
+      $baseUrl = URL::to('/');
+
+      $link = $baseUrl . '/#/reset-password/' . $hash;
+
+      User::where('id', $user->id)
+          ->update(['password_reset_token' => $hash]);
 
 
-        //send email
+      Mail::mailer('smtp')->to($user->email)->send(new ForgotPasswordEmail($link, $user->name));
 
-        return response()
-            ->json('Email to reset password send successfuly', 200);
+
+      return response()
+          ->json(['message' => 'Email send successfully'], 200);
+
+    }catch(Exception $e) {
+      return response($e, 500);
     }
+  }
 }
