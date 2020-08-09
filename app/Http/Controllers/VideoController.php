@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\User;
 use App\Video;
 
@@ -12,9 +11,7 @@ class VideoController extends Controller
 {
   public function index() {
     try {
-        $user = Auth::user();
-
-        $videos = $user->videos()->get();
+        $videos = Video::all();
 
         return response()->json($videos);
 
