@@ -18,7 +18,6 @@ class LoginController extends Controller
       $user = Auth::user();
       return response()->json(['user' => $user], 200);
     }catch (Exception $e){
-      var_dump($e);
       return response('Login internal error', 500);
     }
   }
@@ -59,7 +58,6 @@ class LoginController extends Controller
       return response()->json(['user' => $user], 200);
 
     }catch (Exception $e) {
-        var_dump($e);
         return response('Login internal error', 500);
     }
   }
@@ -68,7 +66,6 @@ class LoginController extends Controller
     try {
       Auth::logout();
     }catch (Exception $e) {
-      var_dump($e);
       return response('Login internal error', 500);
     }
   }

@@ -3110,7 +3110,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.loading = false;
           _this.success = true;
 
-          _this.$route.push("/login");
+          _this.$router.push("/login");
         })["catch"](function (error) {
           _this.password = "";
           _this.confirmPassword = "";
