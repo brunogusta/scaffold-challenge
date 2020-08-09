@@ -26,8 +26,9 @@ Route::prefix('auth')->group(function () {
   Route::post('logout', 'LoginController@logout');
   Route::post('register', 'RegisterController@register');
   Route::post('forgot-password', 'ForgotPasswordController@forgot');
-  Route::post('reset-password', 'ResetPasswordController@reset');
-  Route::put('confirm-email/{token}', ['uses' => 'ConfirmEmailController@confirm']);
+  Route::put('reset-password/{hash}', 'ResetPasswordController@reset');
+  Route::post('resend-email-confirmation', 'ResendEmailController@send');
+  Route::put('confirm-email/{hash}', 'ConfirmEmailController@confirm');
 });
 
 Route::middleware(['auth', 'teacher'])->group(function () {
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'teacher'])->group(function () {
   Route::post('/videos', 'VideoController@store');
   Route::put('/videos/{id}', 'VideoController@edit');
   Route::delete('/videos/{id}', 'VideoController@destroy');
+
+  Route::get('/users', 'UserController@index');
 });
 
 Route::get('/videos/watch', 'VideoController@index')->middleware(['auth']);
