@@ -2570,6 +2570,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "register",
   props: ["app"],
@@ -2630,7 +2655,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.confirmPassword = "";
           _this.loading = false;
           _this.success = true;
-          _this.app.user = data.user;
+
+          _this.$store.dispatch("ActionRegisterUser", data.user);
 
           _this.$router.push("/videos");
         })["catch"](function (error) {
@@ -38387,7 +38413,7 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "nav-link dropdown-toggle",
+                      staticClass: "nav-link dropdown-toggle text-capitalize",
                       attrs: {
                         href: "#",
                         id: "navbarDropdown",
@@ -39142,7 +39168,11 @@ var render = function() {
                         { staticClass: "mb-0" },
                         _vm._l(_vm.errors, function(error, index) {
                           return _c("li", { key: index }, [
-                            _vm._v(_vm._s(error))
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(error) +
+                                "\n              "
+                            )
                           ])
                         }),
                         0
@@ -39264,7 +39294,7 @@ var render = function() {
                         staticClass: "btn btn-success",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Register")]
+                      [_vm._v("\n            Register\n          ")]
                     )
                   : _vm._e(),
                 _vm._v(" "),
@@ -39280,7 +39310,9 @@ var render = function() {
                 _vm._v(" "),
                 _vm.success
                   ? _c("div", { staticClass: "alert alert-success mt-5" }, [
-                      _vm._v("Successfully Registered")
+                      _vm._v(
+                        "\n            Successfully Registered\n          "
+                      )
                     ])
                   : _vm._e()
               ]
@@ -59512,12 +59544,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: ActionLoginUser, ActionLogoutUser */
+/*! exports provided: ActionLoginUser, ActionRegisterUser, ActionLogoutUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionLoginUser", function() { return ActionLoginUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionRegisterUser", function() { return ActionRegisterUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionLogoutUser", function() { return ActionLogoutUser; });
 /* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/mutation-types.js");
 
@@ -59525,8 +59558,12 @@ var ActionLoginUser = function ActionLoginUser(_ref, payload) {
   var commit = _ref.commit;
   commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["LOGIN_USER"], payload);
 };
-var ActionLogoutUser = function ActionLogoutUser(_ref2, payload) {
+var ActionRegisterUser = function ActionRegisterUser(_ref2, payload) {
   var commit = _ref2.commit;
+  commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_USER"], payload);
+};
+var ActionLogoutUser = function ActionLogoutUser(_ref3, payload) {
+  var commit = _ref3.commit;
   commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_USER"], payload);
 };
 
