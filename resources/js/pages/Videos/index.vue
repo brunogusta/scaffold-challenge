@@ -11,9 +11,9 @@
         <h1 class="display-3">Let's get started...</h1>
         <h3 class="text-muted">Click in some video to play!</h3>
       </div>
-      <div class="card my-3">
-        <div v-if="!videos.length" class="container">
-          <h1 class="text-muted mt-5 text-center">No videos added...</h1>
+      <div class="card my-3 p-2">
+        <div v-if="!videos.length" class="container p-5">
+          <h1 class="text-muted text-center">No videos added...</h1>
         </div>
         <CardsWrapper>
           <div v-for="(video, index) in videos" :key="index" class="card">
