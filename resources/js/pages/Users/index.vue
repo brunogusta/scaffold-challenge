@@ -13,7 +13,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">E-mail</th>
             <th scope="col">Active</th>
@@ -27,6 +27,11 @@
             <td>{{user.email}}</td>
             <td>{{user.confirmed ? 'Yes': 'No'}}</td>
             <td>{{user.teacher ? 'Yes': 'No'}}</td>
+          </tr>
+          <tr v-if="!users.length">
+            <td colspan="5">
+              <h1 class="text-muted text-center my-3">No have users...</h1>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -2153,6 +2153,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Users",
   props: ["app"],
@@ -39058,20 +39063,26 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.users, function(user, index) {
-            return _c("tr", { key: index }, [
-              _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(user.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(user.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(user.email))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(user.confirmed ? "Yes" : "No"))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(user.teacher ? "Yes" : "No"))])
-            ])
-          }),
-          0
+          [
+            _vm._l(_vm.users, function(user, index) {
+              return _c("tr", { key: index }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(user.id))
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.email))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.confirmed ? "Yes" : "No"))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.teacher ? "Yes" : "No"))])
+              ])
+            }),
+            _vm._v(" "),
+            !_vm.users.length ? _c("tr", [_vm._m(2)]) : _vm._e()
+          ],
+          2
         )
       ])
     ])
@@ -39092,7 +39103,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
@@ -39101,6 +39112,16 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Active")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Teacher")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "5" } }, [
+      _c("h1", { staticClass: "text-muted text-center my-3" }, [
+        _vm._v("No have users...")
       ])
     ])
   }
@@ -39144,11 +39165,11 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card my-3" },
+          { staticClass: "card my-3 p-2" },
           [
             !_vm.videos.length
-              ? _c("div", { staticClass: "container" }, [
-                  _c("h1", { staticClass: "text-muted mt-5 text-center" }, [
+              ? _c("div", { staticClass: "container p-5" }, [
+                  _c("h1", { staticClass: "text-muted text-center" }, [
                     _vm._v("No videos added...")
                   ])
                 ])
@@ -39508,10 +39529,10 @@ var render = function() {
         [_vm._v("New Video")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "card my-5" }, [
+      _c("div", { staticClass: "card my-5 p-2" }, [
         !_vm.videos.length
-          ? _c("div", { staticClass: "container" }, [
-              _c("h1", { staticClass: "text-muted mt-5 text-center" }, [
+          ? _c("div", { staticClass: "container p-5" }, [
+              _c("h1", { staticClass: "text-muted text-center" }, [
                 _vm._v("No videos added...")
               ])
             ])
@@ -39519,7 +39540,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "container p-2" },
+          { staticClass: "container" },
           [
             _c(
               "CardsWrapper",
