@@ -22,7 +22,7 @@
     In your folder, install the dependencies using your preferred package manager (npm, yarn).
   </li>
   <li>
-    In `.env` file make the following modifications:
+    In .env file make the following modifications:
 
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
