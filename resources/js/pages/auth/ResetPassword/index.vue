@@ -85,7 +85,7 @@ export default {
             this.loading = false;
             this.success = true;
 
-            this.$route.push("/login");
+            this.$router.push("/login");
           })
           .catch((error) => {
             this.password = "";
