@@ -5,25 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
+use App\User;
 class ResetPasswordController extends Controller
 {
-    public function reset(Request $request) {
-        $data = $request->only('token', 'password');
+  public function reset(Request $request, $hash) {
+    try {
+      User::where('password_reset_token', $hash)
+          ->update([
+            'password' => Hash::make($request->password),
+            'password_reset_token' => null
+            ]);
 
-        $user = User::where('password_reset_token', $data->token)->first();
+      return response()
+          ->json(['message' => 'Password updated successfully.']);
 
-        if (!$user) {
-            return response.json(['error' => 'User not found.'], 400);
-          }
-
-        User::where('id', $user->id)
-            ->update([
-                    'password' => Hash::make($data->password),
-                    'password_reset_token' => null
-                ]);
-
-
-        return response()
-            ->json('Password changed successfuly', 200);
+    }catch(Exception $e) {
+      return response($e, 500);
     }
+  }
 }
