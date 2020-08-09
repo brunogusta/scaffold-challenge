@@ -84,6 +84,8 @@ export default {
             this.confirmPassword = "";
             this.loading = false;
             this.success = true;
+
+            this.$route.push("/login");
           })
           .catch((error) => {
             this.password = "";
