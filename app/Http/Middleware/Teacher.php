@@ -20,7 +20,7 @@ class Teacher
         $user = Auth::user();
 
         if(!$user->teacher) {
-          return response()->json('[error] => User must be a teacher to execute this action.', 401);
+          return response('User must be a teacher to execute this action.', 401);
         }
 
         return $next($request);
