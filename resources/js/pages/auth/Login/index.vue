@@ -9,42 +9,38 @@
           <form v-on:submit.prevent="onSubmit">
             <div class="alert alert-danger" v-if="errors.length">
               <ul class="mb-0">
-                <li v-for="(error, index) in errors" :key="index">
-                  {{ error }}
-                </li>
+                <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
               </ul>
             </div>
             <div class="form-group">
               <label>E-mail</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="E-mail"
-                v-model="email"
-              />
+              <input type="text" class="form-control" placeholder="E-mail" v-model="email" />
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Password"
-                v-model="password"
-              />
+              <input type="password" class="form-control" placeholder="Password" v-model="password" />
             </div>
 
-            <button v-if="!loading" class="btn btn-success" type="submit">
-              Login
-            </button>
+            <button v-if="!loading" class="btn btn-success" type="submit">Login</button>
 
             <button v-if="loading" class="btn btn-success disabled">
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Sending...
             </button>
+
+            <div class="mt-4">
+              <span>
+                Forgot your password?
+                <router-link to="/forgot-password">Reset here.</router-link>
+              </span>
+            </div>
+            <div>
+              <span>
+                Don't receive confirmation E-mail?
+                <router-link to="/resend-email-confirmation">Resend here.</router-link>
+              </span>
+            </div>
+
             <div class="mt-3"></div>
             <h5>Teacher login:</h5>
             <h6>Email: teacher@gmail.com</h6>
@@ -58,7 +54,7 @@
 
 <script>
 export default {
-  name: "register",
+  name: "login",
   props: ["app"],
   data() {
     return {
@@ -66,7 +62,7 @@ export default {
       password: "",
       errors: [],
       loading: false,
-      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
     };
   },
   methods: {
@@ -89,7 +85,7 @@ export default {
         this.loading = true;
         const data = {
           email: this.email,
-          password: this.password
+          password: this.password,
         };
 
         this.app.req
@@ -102,16 +98,15 @@ export default {
 
             this.$router.push("/videos");
           })
-          .catch(error => {
+          .catch((error) => {
             this.email = "";
             this.password = "";
             this.loading = false;
             this.errors.push(error.response.data);
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped />
