@@ -5,46 +5,20 @@
         <form v-on:submit.prevent="onSendNewVideo" class="w-100">
           <div class="form-group">
             <h1>Video name:</h1>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Name"
-              v-model="name"
-            />
+            <input type="text" class="form-control" id="name" placeholder="Name" v-model="name" />
             <h1 class="mt-2">Youtube URL:</h1>
-            <input
-              type="text"
-              class="form-control"
-              id="url"
-              placeholder="URL"
-              v-model="url"
-            />
-            <small id="emailHelp" class="form-text text-muted"
-              >Just copy youtube url and place here.</small
-            >
+            <input type="text" class="form-control" id="url" placeholder="URL" v-model="url" />
+            <small id="emailHelp" class="form-text text-muted">Just copy youtube url and place here.</small>
           </div>
           <div class="d-flex">
-            <button v-if="!loading" type="submit" class="btn btn-primary">
-              Send
-            </button>
+            <button v-if="!loading" type="submit" class="btn btn-primary">Send</button>
 
             <button v-if="loading" class="btn btn-primary disabled">
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Sending...
             </button>
 
-            <button
-              type="reset"
-              @click="closeNewVideoModal"
-              class="btn btn-secondary ml-2"
-            >
-              Cancel
-            </button>
+            <button type="reset" @click="closeNewVideoModal" class="btn btn-secondary ml-2">Cancel</button>
           </div>
         </form>
       </div>
@@ -59,36 +33,16 @@
         <form v-on:submit.prevent="onUpdateVideo" class="w-100">
           <div class="form-group">
             <h1>Video name:</h1>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="Name"
-              v-model="name"
-            />
+            <input type="text" class="form-control" id="name" placeholder="Name" v-model="name" />
             <h1 class="mt-2">Youtube URL:</h1>
-            <input
-              type="text"
-              class="form-control"
-              id="url"
-              placeholder="URL"
-              v-model="url"
-            />
-            <small id="emailHelp" class="form-text text-muted"
-              >Just copy youtube url and place here.</small
-            >
+            <input type="text" class="form-control" id="url" placeholder="URL" v-model="url" />
+            <small id="emailHelp" class="form-text text-muted">Just copy youtube url and place here.</small>
           </div>
           <div class="d-flex">
-            <button v-if="!loading" type="submit" class="btn btn-primary">
-              Send
-            </button>
+            <button v-if="!loading" type="submit" class="btn btn-primary">Send</button>
 
             <button v-if="loading" class="btn btn-primary disabled">
-              <span
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Sending...
             </button>
 
@@ -96,9 +50,7 @@
               @click="closeUpdateVideoModal"
               type="reset"
               class="btn btn-secondary ml-2"
-            >
-              Cancel
-            </button>
+            >Cancel</button>
           </div>
         </form>
       </div>
@@ -108,40 +60,23 @@
       <h1>Videos Management</h1>
     </div>
 
-    <button class="btn btn-success" @click="showNewVideoModal">
-      New Video
-    </button>
+    <button class="btn btn-success" @click="showNewVideoModal">New Video</button>
     <div class="card my-5">
       <div v-if="!videos.length" class="container">
-        <h1 class="text-muted mt-5 text-center">
-          No videos added...
-        </h1>
+        <h1 class="text-muted mt-5 text-center">No videos added...</h1>
       </div>
       <div class="container p-2">
         <CardsWrapper>
           <div v-for="(video, index) in videos" :key="index" class="card">
             <ShowVideoButton @click="showVideo(video.url)">
-              <img
-                class="img-thumbnail "
-                v-bind:src="video.thumbUrl"
-                alt="Card image cap"
-              />
+              <img class="img-thumbnail" v-bind:src="video.thumbUrl" alt="Card image cap" />
             </ShowVideoButton>
             <div class="card-body">
-              <h3 class="card-title text-left text-capitalize">
-                {{ video.name }}
-              </h3>
+              <h3 class="card-title text-left">{{ video.name }}</h3>
 
               <div class="d-flex mt-2">
-                <button @click="showUpdateModal(video)" class="btn btn-info">
-                  Update
-                </button>
-                <button
-                  @click="deleteVideo(video.id)"
-                  class="btn btn-danger ml-2"
-                >
-                  Delete
-                </button>
+                <button @click="showUpdateModal(video)" class="btn btn-info">Update</button>
+                <button @click="deleteVideo(video.id)" class="btn btn-danger ml-2">Delete</button>
               </div>
             </div>
           </div>
@@ -159,7 +94,7 @@ export default {
   props: ["app"],
   components: {
     CardsWrapper,
-    ShowVideoButton
+    ShowVideoButton,
   },
   data() {
     return {
@@ -169,7 +104,7 @@ export default {
       url: "",
       previewVideoUrl: "",
       loading: false,
-      errors: []
+      errors: [],
     };
   },
   methods: {
@@ -190,7 +125,7 @@ export default {
         this.loading = true;
         const video = {
           name: this.name,
-          url: this.url
+          url: this.url,
         };
 
         this.app.req
@@ -201,7 +136,7 @@ export default {
             this.fetchVideos();
             this.$modal.hide("new-video");
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error.response.data);
             this.loading = false;
           });
@@ -213,7 +148,7 @@ export default {
         .then(({ data }) => {
           this.videos = data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response.data);
         });
     },
@@ -223,14 +158,14 @@ export default {
         .then(() => {
           this.fetchVideos();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.response.data);
         });
     },
     onUpdateVideo() {
       const data = {
         name: this.name,
-        url: this.url
+        url: this.url,
       };
 
       this.app.req
@@ -240,7 +175,7 @@ export default {
           this.fetchVideos();
           this.$modal.hide("update");
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           console.log(error.response.data);
         });
@@ -259,12 +194,11 @@ export default {
       this.name = "";
       this.url = "";
       this.videoId = "";
-    }
+    },
   },
   mounted() {
     this.fetchVideos();
-  }
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
