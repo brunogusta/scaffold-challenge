@@ -9,20 +9,37 @@
           <form v-on:submit.prevent="onSubmit">
             <div class="alert alert-danger" v-if="errors.length">
               <ul class="mb-0">
-                <li v-for="(error, index) in errors" :key="index">{{error}}</li>
+                <li v-for="(error, index) in errors" :key="index">
+                  {{ error }}
+                </li>
               </ul>
             </div>
             <div class="form-group">
               <label>Name</label>
-              <input type="text" class="form-control" placeholder="Name" v-model="name" />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Name"
+                v-model="name"
+              />
             </div>
             <div class="form-group">
               <label>E-mail</label>
-              <input type="text" class="form-control" placeholder="E-mail" v-model="email" />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="E-mail"
+                v-model="email"
+              />
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password" v-model="password" />
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                v-model="password"
+              />
             </div>
             <div class="form-group">
               <label>Confirm Password</label>
@@ -33,13 +50,21 @@
                 v-model="confirmPassword"
               />
             </div>
-            <button v-if="!loading" class="btn btn-success" type="submit">Register</button>
+            <button v-if="!loading" class="btn btn-success" type="submit">
+              Register
+            </button>
 
             <button v-if="loading" class="btn btn-success disabled">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
               Sending...
             </button>
-            <div class="alert alert-success mt-5" v-if="success">Successfully Registered</div>
+            <div class="alert alert-success mt-5" v-if="success">
+              Successfully Registered
+            </div>
           </form>
         </div>
       </div>
@@ -60,7 +85,7 @@ export default {
       errors: [],
       loading: false,
       success: false,
-      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
     };
   },
   methods: {
@@ -96,7 +121,7 @@ export default {
         const data = {
           name: this.name,
           email: this.email,
-          password: this.password,
+          password: this.password
         };
 
         this.app.req
@@ -109,10 +134,10 @@ export default {
             this.loading = false;
             this.success = true;
 
-            this.app.user = data.user;
+            this.$store.dispatch("ActionRegisterUser", data.user);
             this.$router.push("/videos");
           })
-          .catch((error) => {
+          .catch(error => {
             this.name = "";
             this.email = "";
             this.password = "";
@@ -121,8 +146,8 @@ export default {
             this.errors.push(error.response.data);
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
