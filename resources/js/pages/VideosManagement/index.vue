@@ -61,11 +61,11 @@
     </div>
 
     <button class="btn btn-success" @click="showNewVideoModal">New Video</button>
-    <div class="card my-5">
-      <div v-if="!videos.length" class="container">
-        <h1 class="text-muted mt-5 text-center">No videos added...</h1>
+    <div class="card my-5 p-2">
+      <div v-if="!videos.length" class="container p-5">
+        <h1 class="text-muted text-center">No videos added...</h1>
       </div>
-      <div class="container p-2">
+      <div class="container">
         <CardsWrapper>
           <div v-for="(video, index) in videos" :key="index" class="card">
             <ShowVideoButton @click="showVideo(video.url)">
