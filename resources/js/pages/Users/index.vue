@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="mt-5">
-      <h1 class="display-3">All users...</h1>
+      <h1 class="display-5">All users...</h1>
     </div>
 
     <button @click="fetchUsers" v-if="!loading" class="btn btn-success" type="submit">Refresh</button>

@@ -2242,6 +2242,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Videos",
@@ -39128,7 +39130,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mt-5" }, [
-      _c("h1", { staticClass: "display-3" }, [_vm._v("All users...")])
+      _c("h1", { staticClass: "display-5" }, [_vm._v("All users...")])
     ])
   },
   function() {
@@ -39277,10 +39279,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mt-3" }, [
-      _c("h1", { staticClass: "display-4" }, [_vm._v("Let's get started...")]),
-      _vm._v(" "),
-      _c("h3", { staticClass: "text-muted" }, [
-        _vm._v("Click in some video to play!")
+      _c("h1", { staticClass: "display-5" }, [
+        _vm._v("\n        Let's get started...\n        "),
+        _c("span", { staticClass: "text-muted" }, [
+          _vm._v("Click in some video to play!")
+        ])
       ])
     ])
   }
@@ -39706,7 +39709,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mt-5" }, [
-      _c("h1", [_vm._v("Videos Management")])
+      _c("h1", { staticClass: "display-5" }, [_vm._v("Videos Management")])
     ])
   }
 ]
