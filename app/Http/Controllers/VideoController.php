@@ -16,7 +16,7 @@ class VideoController extends Controller
         return response()->json($videos);
 
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error fetch all videos, try again', 500);
     }
   }
 
@@ -29,18 +29,24 @@ class VideoController extends Controller
         return response()->json($videos);
 
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error on fetch user videos, try again', 500);
     }
   }
 
   public function store(Request $request) {
     try {
 
+      if (!filter_var($request->url, FILTER_VALIDATE_URL)) {
+        return response('Invalid youtube url.', 400);
+      }
+
       parse_str(parse_url($request->url, PHP_URL_QUERY), $id);
+
 
       $thumbUrl = strtr('https://img.youtube.com/vi/{id}/hqdefault.jpg', [
         '{id}' => $id['v']
       ]);
+
 
 
       $data = ['url' => $request->url, 'name' => $request->name, 'thumbUrl' => $thumbUrl];
@@ -52,7 +58,7 @@ class VideoController extends Controller
 
       return response()->json(['video' => $video]);
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error on save a new video, try again', 500);
     }
   }
 
@@ -63,16 +69,21 @@ class VideoController extends Controller
 
         return response()->json(['message' => 'Video successfully deleted']);
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error on delete a video, try again', 500);
     }
   }
 
   public function edit(Request $request, $id) {
     try {
-      parse_str(parse_url($request->url, PHP_URL_QUERY), $string);
+
+      if (!filter_var($request->url, FILTER_VALIDATE_URL)) {
+        return response('Invalid youtube url.', 400);
+      }
+
+      parse_str(parse_url($request->url, PHP_URL_QUERY), $hash);
 
       $thumbUrl = strtr('https://img.youtube.com/vi/{id}/hqdefault.jpg', [
-        '{id}' => $string['v']
+        '{id}' => $hash['v']
       ]);
 
       $data = ['url' => $request->url, 'name' => $request->name, 'thumbUrl' => $thumbUrl];
@@ -84,7 +95,7 @@ class VideoController extends Controller
 
       return response()->json(['message' => 'Video successfully updated']);
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error on update a video', 500);
     }
   }
 }

@@ -2099,11 +2099,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2117,6 +2112,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2177,10 +2177,12 @@ __webpack_require__.r(__webpack_exports__);
       this.app.req.get("users").then(function (_ref) {
         var data = _ref.data;
         _this.loading = false;
+        _this.errors = [];
         _this.users = data;
       })["catch"](function (error) {
+        _this.errors.push(error.response.data);
+
         _this.loading = false;
-        console.log(error.response.data);
       });
     }
   },
@@ -2201,6 +2203,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles */ "./resources/js/pages/Videos/styles.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2262,10 +2269,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.app.req.get("videos/watch").then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
         _this.videos = data;
       })["catch"](function (error) {
-        console.log(error.response.data);
+        _this.errors.push(error.response.data);
       });
     }
   },
@@ -2286,6 +2292,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles */ "./resources/js/pages/VideosManagement/styles.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2417,14 +2433,14 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.app.req.post("videos", video).then(function (_ref) {
           var data = _ref.data;
-          console.log(data.video);
           _this.loading = false;
 
           _this.fetchVideos();
 
           _this.$modal.hide("new-video");
         })["catch"](function (error) {
-          console.log(error.response.data);
+          _this.errors.push(error.response.data);
+
           _this.loading = false;
         });
       }
@@ -2436,7 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         _this2.videos = data;
       })["catch"](function (error) {
-        console.log(error.response.data);
+        _this2.errors.push(error);
       });
     },
     deleteVideo: function deleteVideo(id) {
@@ -2445,7 +2461,7 @@ __webpack_require__.r(__webpack_exports__);
       this.app.req["delete"]("videos/".concat(id)).then(function () {
         _this3.fetchVideos();
       })["catch"](function (error) {
-        console.log(error.response.data);
+        _this3.errors.push(error);
       });
     },
     onUpdateVideo: function onUpdateVideo() {
@@ -2457,14 +2473,12 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.app.req.put("videos/".concat(this.videoId), data).then(function (_ref3) {
         var data = _ref3.data;
-        console.log(data);
 
         _this4.fetchVideos();
 
         _this4.$modal.hide("update");
       })["catch"](function (error) {
-        console.log(error);
-        console.log(error.response.data);
+        _this4.errors.push(error.response.data);
       });
     },
     showUpdateModal: function showUpdateModal(video) {
@@ -38988,7 +39002,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "container h-75 d-flex  align-items-center" },
+      { staticClass: "container h-75 d-flex align-items-center" },
       [
         _c("div", { staticClass: "mt-5" }, [
           _c("h1", { staticClass: "display-3" }, [_vm._v("Welcome to")]),
@@ -38998,9 +39012,7 @@ var staticRenderFns = [
           _c("h1", { staticClass: "display-3" }, [_vm._v("platform!")]),
           _vm._v(" "),
           _c("h1", { staticClass: "text-muted mt-5" }, [
-            _vm._v(
-              "\n      Login or Register to have access to all videos!\n    "
-            )
+            _vm._v("Login or Register to have access to all videos!")
           ]),
           _vm._v(" "),
           _c("h1", { staticClass: "blockquote text-muted mt-5" }, [
@@ -39054,6 +39066,19 @@ var render = function() {
             attrs: { role: "status", "aria-hidden": "true" }
           }),
           _vm._v("\n    Fetching...\n  ")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.errors.length
+      ? _c("div", { staticClass: "alert alert-danger" }, [
+          _c(
+            "ul",
+            { staticClass: "mb-0" },
+            _vm._l(_vm.errors, function(error, index) {
+              return _c("li", { key: index }, [_vm._v(_vm._s(error))])
+            }),
+            0
+          )
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -39163,6 +39188,19 @@ var render = function() {
       _c("div", { staticClass: "container p-2" }, [
         _vm._m(0),
         _vm._v(" "),
+        _vm.errors.length
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c(
+                "ul",
+                { staticClass: "mb-0" },
+                _vm._l(_vm.errors, function(error, index) {
+                  return _c("li", { key: index }, [_vm._v(_vm._s(error))])
+                }),
+                0
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c(
           "div",
           { staticClass: "card my-3 p-2" },
@@ -39268,8 +39306,24 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "container my-3 d-flex align-items-center" },
+            {
+              staticClass:
+                "container my-3 d-flex flex-column justify-content-center"
+            },
             [
+              _vm.errors.length
+                ? _c("div", { staticClass: "alert alert-danger" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "mb-0" },
+                      _vm._l(_vm.errors, function(error, index) {
+                        return _c("li", { key: index }, [_vm._v(_vm._s(error))])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c(
                 "form",
                 {
@@ -39402,8 +39456,24 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "container my-3 d-flex align-items-center" },
+            {
+              staticClass:
+                "container my-3 d-flex flex-column justify-content-center"
+            },
             [
+              _vm.errors.length
+                ? _c("div", { staticClass: "alert alert-danger" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "mb-0" },
+                      _vm._l(_vm.errors, function(error, index) {
+                        return _c("li", { key: index }, [_vm._v(_vm._s(error))])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c(
                 "form",
                 {
