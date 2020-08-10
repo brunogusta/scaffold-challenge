@@ -14,7 +14,7 @@ class UserController extends Controller
 
       return response()->json($users);
     }catch (Exception $e){
-      return response($e, 500);
+      return response('Unexpected error on fetch all users, try again', 500);
     }
   }
 }
