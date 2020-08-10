@@ -11,6 +11,11 @@
         <h1 class="display-3">Let's get started...</h1>
         <h3 class="text-muted">Click in some video to play!</h3>
       </div>
+      <div class="alert alert-danger" v-if="errors.length">
+        <ul class="mb-0">
+          <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+        </ul>
+      </div>
       <div class="card my-3 p-2">
         <div v-if="!videos.length" class="container p-5">
           <h1 class="text-muted text-center">No videos added...</h1>
@@ -60,11 +65,10 @@ export default {
       this.app.req
         .get("videos/watch")
         .then(({ data }) => {
-          console.log(data);
           this.videos = data;
         })
         .catch((error) => {
-          console.log(error.response.data);
+          this.errors.push(error.response.data);
         });
     },
   },
