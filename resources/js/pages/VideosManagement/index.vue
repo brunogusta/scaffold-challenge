@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <modal name="new-video" height="auto" @before-close="clearInputs">
+    <modal name="new-video" height="auto" @before-close="clearInputs" adaptive>
       <div class="container my-3 d-flex flex-column justify-content-center">
         <div class="alert alert-danger" v-if="errors.length">
           <ul class="mb-0">
@@ -28,12 +28,12 @@
         </form>
       </div>
     </modal>
-    <modal name="preview-video" height="auto">
+    <modal name="preview-video" height="auto" adaptive>
       <div class="card m-3">
         <video-embed :src="previewVideoUrl"></video-embed>
       </div>
     </modal>
-    <modal name="update" height="auto" @before-close="clearInputs">
+    <modal name="update" height="auto" @before-close="clearInputs" adaptive>
       <div class="container my-3 d-flex flex-column justify-content-center">
         <div class="alert alert-danger" v-if="errors.length">
           <ul class="mb-0">
@@ -201,6 +201,7 @@ export default {
       this.name = "";
       this.url = "";
       this.videoId = "";
+      this.errors = "";
     },
   },
   mounted() {
