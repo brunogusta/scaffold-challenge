@@ -9,6 +9,11 @@
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Fetching...
     </button>
+    <div class="alert alert-danger" v-if="errors.length">
+      <ul class="mb-0">
+        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+      </ul>
+    </div>
     <div class="card my-5">
       <table class="table">
         <thead>
@@ -59,11 +64,12 @@ export default {
         .get("users")
         .then(({ data }) => {
           this.loading = false;
+          this.errors = [];
           this.users = data;
         })
         .catch((error) => {
+          this.errors.push(error.response.data);
           this.loading = false;
-          console.log(error.response.data);
         });
     },
   },
