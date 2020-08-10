@@ -17,11 +17,13 @@
 ---
 
 <ul>
-  <li>Start by cloning or downloading this repository.</li>
   <li>
-      Whith composer installed, in your cloned folder run the follow command to install laravel dependencies:
+    Start by cloning or downloading this repository.
+  </li>
+  <li>
+    Whith composer installed, in your cloned folder run the follow command to install laravel dependencies:
 
-      composer install
+    composer install
 
   </li>
   <li>
@@ -51,22 +53,22 @@
 
   </li>
    <li>
-      Run the command to update configurations: 
-      
-      php artisan key:generate
-      php artisan config:cache
+    Run the command to update configurations: 
+    
+    php artisan key:generate
+    php artisan config:cache
   </li>
   <li>
-      Run the next commands to start the aplication:
+    Run the next commands to start the aplication:
 
-      php artisan migrate
-      php artisan db:seed
-      php artisan serve
-      npm run dev
+    php artisan migrate
+    php artisan db:seed
+    php artisan serve
+    npm run dev
 
   </li>
-   <li>
-      The aplication is ready to explore.
+  <li>
+    The aplication is ready to explore.
   </li>
 </ul>
 
