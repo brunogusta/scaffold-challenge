@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <modal name="new-video" height="auto" @before-close="clearInputs">
-      <div class="container my-3 d-flex align-items-center">
+      <div class="container my-3 d-flex flex-column justify-content-center">
+        <div class="alert alert-danger" v-if="errors.length">
+          <ul class="mb-0">
+            <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+          </ul>
+        </div>
         <form v-on:submit.prevent="onSendNewVideo" class="w-100">
           <div class="form-group">
             <h1>Video name:</h1>
@@ -29,7 +34,12 @@
       </div>
     </modal>
     <modal name="update" height="auto" @before-close="clearInputs">
-      <div class="container my-3 d-flex align-items-center">
+      <div class="container my-3 d-flex flex-column justify-content-center">
+        <div class="alert alert-danger" v-if="errors.length">
+          <ul class="mb-0">
+            <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+          </ul>
+        </div>
         <form v-on:submit.prevent="onUpdateVideo" class="w-100">
           <div class="form-group">
             <h1>Video name:</h1>
@@ -131,13 +141,12 @@ export default {
         this.app.req
           .post("videos", video)
           .then(({ data }) => {
-            console.log(data.video);
             this.loading = false;
             this.fetchVideos();
             this.$modal.hide("new-video");
           })
           .catch((error) => {
-            console.log(error.response.data);
+            this.errors.push(error.response.data);
             this.loading = false;
           });
       }
@@ -149,7 +158,7 @@ export default {
           this.videos = data;
         })
         .catch((error) => {
-          console.log(error.response.data);
+          this.errors.push(error);
         });
     },
     deleteVideo(id) {
@@ -159,7 +168,7 @@ export default {
           this.fetchVideos();
         })
         .catch((error) => {
-          console.log(error.response.data);
+          this.errors.push(error);
         });
     },
     onUpdateVideo() {
@@ -171,13 +180,11 @@ export default {
       this.app.req
         .put(`videos/${this.videoId}`, data)
         .then(({ data }) => {
-          console.log(data);
           this.fetchVideos();
           this.$modal.hide("update");
         })
         .catch((error) => {
-          console.log(error);
-          console.log(error.response.data);
+          this.errors.push(error.response.data);
         });
     },
     showUpdateModal(video) {

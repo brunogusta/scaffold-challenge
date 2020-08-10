@@ -36,7 +36,6 @@ Route::middleware(['auth', 'teacher'])->group(function () {
   Route::post('/videos', 'VideoController@store');
   Route::put('/videos/{id}', 'VideoController@edit');
   Route::delete('/videos/{id}', 'VideoController@destroy');
-
   Route::get('/users', 'UserController@index');
 });
 
