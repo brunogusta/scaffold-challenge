@@ -21,7 +21,7 @@ class ResetPasswordController extends Controller
           ->json(['message' => 'Password updated successfully.']);
 
     }catch(Exception $e) {
-      return response($e, 500);
+      return response('Unexpected error on reset password requestion, try again', 500);
     }
   }
 }
