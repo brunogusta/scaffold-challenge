@@ -15,31 +15,33 @@
       </ul>
     </div>
     <div class="card my-5">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Active</th>
-            <th scope="col">Teacher</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(user, index) in users" :key="index">
-            <th scope="row">{{user.id}}</th>
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.confirmed ? 'Yes': 'No'}}</td>
-            <td>{{user.teacher ? 'Yes': 'No'}}</td>
-          </tr>
-          <tr v-if="!users.length">
-            <td colspan="5">
-              <h1 class="text-muted text-center my-3">No have users...</h1>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Active</th>
+              <th scope="col">Teacher</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(user, index) in users" :key="index">
+              <th scope="row">{{user.id}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.confirmed ? 'Yes': 'No'}}</td>
+              <td>{{user.teacher ? 'Yes': 'No'}}</td>
+            </tr>
+            <tr v-if="!users.length">
+              <td colspan="5">
+                <h1 class="text-muted text-center my-3">No have users...</h1>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
