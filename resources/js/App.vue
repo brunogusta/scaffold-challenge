@@ -12,14 +12,14 @@ import Navbar from "./components/Navbar";
 export default {
   name: "app",
   components: {
-    Navbar
+    Navbar,
   },
   data() {
     return {
       user: null,
       req: axios.create({
-        baseUrl: "{{  URL::to(" / ")  }}"
-      })
+        baseUrl: "{{  URL::to(" / ")  }}",
+      }),
     };
   },
   mounted() {
@@ -30,9 +30,7 @@ export default {
       this.req.get("auth/init").then(({ data }) => {
         this.$store.dispatch("ActionLoginUser", data.user);
       });
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped></style>
