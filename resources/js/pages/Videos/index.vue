@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <modal name="preview-video" height="auto">
+    <modal name="preview-video" height="auto" adaptive>
       <div class="card m-3">
         <video-embed :src="previewVideoUrl"></video-embed>
       </div>
@@ -8,7 +8,7 @@
 
     <div class="container p-2">
       <div class="mt-3">
-        <h1 class="display-3">Let's get started...</h1>
+        <h1 class="display-4">Let's get started...</h1>
         <h3 class="text-muted">Click in some video to play!</h3>
       </div>
       <div class="alert alert-danger" v-if="errors.length">
@@ -66,6 +66,7 @@ export default {
         .get("videos/watch")
         .then(({ data }) => {
           this.videos = data;
+          this.errors = "";
         })
         .catch((error) => {
           this.errors.push(error.response.data);
