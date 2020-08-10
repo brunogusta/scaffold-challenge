@@ -1,6 +1,6 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
-    <div class="card w-50 mt-5">
+    <div class="card mt-5">
       <div class="card-header">
         <h1>Reset Password</h1>
       </div>
