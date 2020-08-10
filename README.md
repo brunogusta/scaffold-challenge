@@ -74,9 +74,8 @@
 
 <div id='license'>
   <h2>:page_facing_up: License</h2>
+  MIT
 </div>
-
-MIT
 
 ---
 
