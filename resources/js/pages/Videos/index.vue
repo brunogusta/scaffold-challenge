@@ -8,8 +8,10 @@
 
     <div class="container p-2">
       <div class="mt-3">
-        <h1 class="display-4">Let's get started...</h1>
-        <h3 class="text-muted">Click in some video to play!</h3>
+        <h1 class="display-5">
+          Let's get started...
+          <span class="text-muted">Click in some video to play!</span>
+        </h1>
       </div>
       <div class="alert alert-danger" v-if="errors.length">
         <ul class="mb-0">
