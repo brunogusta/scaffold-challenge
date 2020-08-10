@@ -67,7 +67,7 @@
     </modal>
 
     <div class="mt-5">
-      <h1>Videos Management</h1>
+      <h1 class="display-5">Videos Management</h1>
     </div>
 
     <button class="btn btn-success" @click="showNewVideoModal">New Video</button>
