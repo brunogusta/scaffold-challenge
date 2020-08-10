@@ -47,7 +47,7 @@ class ForgotPasswordController extends Controller
           ->json(['message' => 'Email send successfully'], 200);
 
     }catch(Exception $e) {
-      return response($e, 500);
+      return response('Unexpected error on request, try again', 500);
     }
   }
 }

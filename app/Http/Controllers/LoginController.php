@@ -18,7 +18,7 @@ class LoginController extends Controller
       $user = Auth::user();
       return response()->json(['user' => $user], 200);
     }catch (Exception $e){
-      return response('Login internal error', 500);
+      return response('Unexpected error on fetch authenticated user', 500);
     }
   }
 
@@ -58,7 +58,7 @@ class LoginController extends Controller
       return response()->json(['user' => $user], 200);
 
     }catch (Exception $e) {
-        return response('Login internal error', 500);
+        return response('Unexpected error on login, try again', 500);
     }
   }
 
@@ -66,7 +66,7 @@ class LoginController extends Controller
     try {
       Auth::logout();
     }catch (Exception $e) {
-      return response('Login internal error', 500);
+      return response('Unexpected error on logout, try again', 500);
     }
   }
 }

@@ -19,7 +19,7 @@ class ConfirmEmailController extends Controller
 
       return response()->json(['message' => 'E-mail confirmed.']);
     }catch(Exception $e) {
-      return response($e, 500);
+      return response('Unexpected error on email confirmation, try again', 500);
     }
   }
 }

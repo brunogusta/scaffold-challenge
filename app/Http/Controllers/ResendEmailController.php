@@ -47,7 +47,7 @@ class ResendEmailController extends Controller
       return response()->json(['message' => 'Email successfully sent.'], 200);
 
     }catch (Exception $e) {
-      return response($e, 500);
+      return response('Unexpected error resend email requestion, try again', 500);
     }
   }
 }

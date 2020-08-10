@@ -50,7 +50,7 @@ class RegisterController extends Controller
       return response()->json(['message' => 'Success'], 200);
 
     }catch (Exception $e) {
-      return response('Register internal error', 500);
+      return response('Unexpected error on register, try again', 500);
     }
   }
 }
